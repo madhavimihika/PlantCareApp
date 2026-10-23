@@ -45,8 +45,16 @@ struct CareToolsView: View {
                         }
                         
                         LazyVGrid(columns: columns, spacing: 16) {
-                            ToolCard(icon: "drop.fill", iconColor: .blue, title: "Watering", subtitle: "4 plants due this week")
-                            ToolCard(icon: "sparkles", iconColor: .orange, title: "Fertilizer", subtitle: "Next feed in 2 days")
+                            NavigationLink(destination: WateringScheduleView()) {
+                                ToolCard(icon: "drop.fill", iconColor: .blue, title: "Watering", subtitle: "4 plants due this week")
+                            }
+                            .buttonStyle(PlainButtonStyle()) // Keeps it looking like a card
+
+                            // Change the Growth records ToolCard to this:
+                            NavigationLink(destination: GrowthRecordsView()) {
+                                ToolCard(icon: "chart.line.uptrend.xyaxis", iconColor: .green, title: "Growth records", subtitle: "+8.4 cm this month")
+                            }
+                            .buttonStyle(PlainButtonStyle())
                             ToolCard(icon: "chart.line.uptrend.xyaxis", iconColor: .green, title: "Growth records", subtitle: "+8.4 cm this month")
                             ToolCard(icon: "photo", iconColor: .pink, title: "Plant photos", subtitle: "48 memories")
                             ToolCard(icon: "clock.arrow.circlepath", iconColor: .purple, title: "Care history", subtitle: "All activity in one place")
