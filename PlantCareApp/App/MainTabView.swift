@@ -18,9 +18,10 @@ struct MainTabView: View {
             ScanView()
                 .tabItem{Label ("Scan",systemImage: "camera.viewfinder") }
             
-            Text("Nurseries Coming Soon")
-                .tabItem { Label("Nurseries", systemImage: "mappin.and.ellipse") }
-            
+            NurseriesView()
+                            .tabItem {
+                                Label("Nurseries", systemImage: "mappin.and.ellipse")
+                            }
             
             VStack {
                 Text("Profile")

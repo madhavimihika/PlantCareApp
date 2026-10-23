@@ -14,33 +14,33 @@ struct CareToolsView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.plantBackground.ignoresSafeArea()
+                Color("plantBackground").ignoresSafeArea()
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
                         HStack {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("MY PLANT CARE").font(.caption).fontWeight(.bold).foregroundColor(.gray).tracking(1)
-                                Text("Care tools").font(.system(size: 34, weight: .bold, design: .serif)).foregroundColor(.plantText)
+                                Text("Care tools").font(.system(size: 34, weight: .bold, design: .serif)).foregroundColor(Color("plantText"))
                             }
                             Spacer()
                             Text("M").font(.headline).foregroundColor(.white).frame(width: 40, height: 40).background(Color.orange.opacity(0.7)).clipShape(Circle())
                         }.padding(.top, 10)
                         
                         ZStack(alignment: .bottomLeading) {
-                            Color.plantSecondary.frame(height: 200).frame(maxWidth: .infinity).cornerRadius(20)
+                            Color("plantSecondary").frame(height: 200).frame(maxWidth: .infinity).cornerRadius(20)
                                 .overlay(LinearGradient(gradient: Gradient(colors: [.clear, .black.opacity(0.6)]), startPoint: .center, endPoint: .bottom).cornerRadius(20))
                             
                             VStack(alignment: .leading, spacing: 12) {
                                 Text("3 plants need\nyour attention").font(.title).fontWeight(.bold).foregroundColor(.white)
                                 Button(action: {}) {
-                                    Text("View care plan").font(.footnote).fontWeight(.bold).foregroundColor(.plantPrimary)
+                                    Text("View care plan").font(.footnote).fontWeight(.bold).foregroundColor(Color("plantPrimary"))
                                         .padding(.horizontal, 16).padding(.vertical, 8).background(Color.white).cornerRadius(20)
                                 }
                             }.padding(20)
                         }
                         
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Organize your garden").font(.title2).fontWeight(.bold).foregroundColor(.plantText)
+                            Text("Organize your garden").font(.title2).fontWeight(.bold).foregroundColor(Color("plantText"))
                             Text("Everything your plants need, in one place.").font(.subheadline).foregroundColor(.gray)
                         }
                         
@@ -67,7 +67,7 @@ struct ToolCard: View {
                 .frame(width: 45, height: 45).background(iconColor.opacity(0.15)).clipShape(Circle())
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Text(title).font(.headline).foregroundColor(.plantText)
+                    Text(title).font(.headline).foregroundColor(Color("plantText"))
                     Spacer()
                     Image(systemName: "chevron.right").font(.caption).foregroundColor(.gray)
                 }
@@ -76,3 +76,4 @@ struct ToolCard: View {
         }.padding(16).background(Color.white).cornerRadius(20)
     }
 }
+
