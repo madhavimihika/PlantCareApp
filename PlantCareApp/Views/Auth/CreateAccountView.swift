@@ -17,24 +17,26 @@ struct CreateAccountView: View {
     
     var body: some View {
         ZStack {
-            Color.plantBackground.ignoresSafeArea()
+            Color.init("plantBackground").ignoresSafeArea()
             ScrollView {
                 VStack(alignment: .leading, spacing: 25) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Create account").font(.largeTitle).fontWeight(.bold).foregroundColor(.plantText)
+                        Text("Create account").font(.largeTitle).fontWeight(.bold).foregroundColor(Color.init("plantText"))
                         Text("Join us to keep your plants happy.").font(.subheadline).foregroundColor(.gray)
                     }.padding(.top, 20)
                     
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Full Name").font(.headline).foregroundColor(.plantText)
-                        TextField("Maya Silva", text: $fullName).padding().background(Color.white).cornerRadius(10)
+                        Text("Full Name").font(.headline).foregroundColor(Color.init("plantText"))
+                        TextField("Maya Silva", text: $fullName).padding().background(Color(.systemBackground)).cornerRadius(10)
+                            .textContentType(.name)
                         
-                        Text("Email").font(.headline).foregroundColor(.plantText)
+                        Text("Email").font(.headline).foregroundColor(Color.init("plantText"))
                         TextField("you@example.com", text: $email)
-                            .padding().background(Color.white).cornerRadius(10).keyboardType(.emailAddress).autocapitalization(.none)
+                            .padding().background(Color(.systemBackground)).cornerRadius(10).keyboardType(.emailAddress).textInputAutocapitalization(.never).textContentType(.emailAddress)
                         
-                        Text("Password").font(.headline).foregroundColor(.plantText)
-                        SecureField("••••••••", text: $password).padding().background(Color.white).cornerRadius(10)
+                        Text("Password").font(.headline).foregroundColor(Color.init("plantText"))
+                        SecureField("••••••••", text: $password).padding().background(Color(.systemBackground)).cornerRadius(10)
+                            .textContentType(.newPassword)
                     }
                     
                     if !errorMessage.isEmpty { Text(errorMessage).foregroundColor(.red).font(.footnote) }
@@ -61,3 +63,4 @@ struct CreateAccountView: View {
         }.navigationBarTitleDisplayMode(.inline)
     }
 }
+
