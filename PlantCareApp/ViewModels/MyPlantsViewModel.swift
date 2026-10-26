@@ -4,21 +4,40 @@
 //
 //  Created by cobsccomp251p-24 on 2026-10-23.
 //
+//
+//  MyPlantsViewModel.swift
+//  PlantCareApp
+//
+//  Created by cobsccomp251p-24 on 2026-10-23.
+//
 
 import SwiftUI
 import Combine
 
 class MyPlantsViewModel: ObservableObject {
-    @Published var plants: [Plant] = [
-        Plant(name: "Pip", botanicalName: "Ficus lyrata", location: "Bedroom", health: .healthy, imageName: "leaf.fill"),
-        Plant(name: "Pothos", botanicalName: "Ficus lyrata", location: "Bedroom", health: .needsCare, imageName: "leaf.fill"),
-        Plant(name: "Croton", botanicalName: "Monstera", location: "Living room", health: .healthy, imageName: "leaf.fill"),
-        Plant(name: "Fern", botanicalName: "Ficus lyrata", location: "Bedroom", health: .healthy, imageName: "leaf.fill"),
-        Plant(name: "Palm", botanicalName: "Outdoor", location: "Balcony", health: .needsCare, imageName: "leaf.fill"),
-        Plant(name: "Pip", botanicalName: "Ficus lyrata", location: "Bedroom", health: .healthy, imageName: "leaf.fill")
-    ]
+   
+    static let shared = MyPlantsViewModel()
     
+    //Use empty array (Firebase will fill this)
+    @Published var plants: [Plant] = []
     @Published var selectedFilter: String = "All"
+    
+    init() {
+        loadPlantsFromCloud()
+    }
+    
+    func loadPlantsFromCloud() {
+        FirebaseService.shared.fetchPlants { fetchedPlants in
+            DispatchQueue.main.async {
+                self.plants = fetchedPlants
+            }
+        }
+    }
+    
+    func addPlant(name: String, botanicalName: String, location: String) {
+        FirebaseService.shared.savePlant(name: name, botanicalName: botanicalName, location: location)
+        loadPlantsFromCloud()
+    }
     
     var filteredPlants: [Plant] {
         switch selectedFilter {
